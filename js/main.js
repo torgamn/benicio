@@ -17,18 +17,17 @@ async function main() {
     bindEventListeners(state, ui);
     
     let initialContent = `; Programa
-VLD 11 ; Carrega [1, 2, 3, 4] no VAC
-LDA 15 ; Carrega 10 no AC
-VEADD ; VAC = [11, 12, 13, 14]
+VLDA 10 ; Carrega [1, 2, 3, 4] no VA
+LDI 10 ; Carrega 10 no AC (A) imediatamente
+VEADD ; VA = [11, 12, 13, 14]
 VNOT ; Inverte os bits de cada elemento
-VST 20 ; Salva o resultado em 20-23
+VSTA 20 ; Salva o resultado em 20-23
 HLT
 ; Vetor de dados
 1
 2
 3
-4
-10`;
+4`;
     
     const lines = initialContent.split('\n');
     let memUsed = 0;

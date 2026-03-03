@@ -47,13 +47,13 @@
             { "name": "JN", "op": 144, "desc": "Salta para o endereço se a flag de sinal (N) estiver ativada.", "example": "JN 46" },
             { "name": "JZ", "op": 160, "desc": "Salta para o endereço se a flag de zero (Z) estiver ativada.", "example": "JZ 47" },
             { "name": "HLT", "op": 240, "desc": "Interrompe a execução do programa.", "example": "HLT" },
-            { "name": "VLD", "op": 241, "desc": "Carrega vetor da memória (a partir do endereço) para o registrador VAC.", "example": "VLD 50" },
-            { "name": "VST", "op": 242, "desc": "Armazena o vetor de VAC na memória (a partir do endereço).", "example": "VST 54" },
-            { "name": "VADD", "op": 243, "desc": "Soma, elemento a elemento, VAC com o vetor armazenado no endereço.", "example": "VADD 51" },
-            { "name": "VEADD", "op": 244, "desc": "Soma o valor escalar do AC a todos os elementos de VAC.", "example": "VEADD" },
-            { "name": "VOR", "op": 245, "desc": "Realiza OU lógico, elemento a elemento, entre VAC e o vetor da memória.", "example": "VOR 52" },
-            { "name": "VAND", "op": 246, "desc": "Realiza E lógico, elemento a elemento, entre VAC e o vetor da memória.", "example": "VAND 53" },
-            { "name": "VNOT", "op": 247, "desc": "Inverte bit a bit cada elemento do vetor VAC.", "example": "VNOT" },
+            { "name": "VLDA", "op": 241, "desc": "Carrega vetor da memória (a partir do endereço) para o registrador VA.", "example": "VLDA 50" },
+            { "name": "VSTA", "op": 242, "desc": "Armazena o vetor de VA na memória (a partir do endereço).", "example": "VSTA 54" },
+            { "name": "VADD", "op": 243, "desc": "Soma, elemento a elemento, VA com o vetor armazenado no endereço.", "example": "VADD 51" },
+            { "name": "VEADD", "op": 244, "desc": "Soma o valor escalar do AC a todos os elementos de VA.", "example": "VEADD" },
+            { "name": "VOR", "op": 245, "desc": "Realiza OU lógico, elemento a elemento, entre VA e o vetor da memória.", "example": "VOR 52" },
+            { "name": "VAND", "op": 246, "desc": "Realiza E lógico, elemento a elemento, entre VA e o vetor da memória.", "example": "VAND 53" },
+            { "name": "VNOT", "op": 247, "desc": "Inverte bit a bit cada elemento do vetor VA.", "example": "VNOT" },
             { "name": "LDIX", "op": 176, "desc": "Carrega o valor do endereço de memória para o Registrador de Índice (IX).", "example": "LDIX 40" },
             { "name": "STIX", "op": 177, "desc": "Armazena o valor de IX no endereço de memória.", "example": "STIX 41" },
             { "name": "LDBP", "op": 192, "desc": "Carrega o valor do endereço de memória para o Registrador Base (BP).", "example": "LDBP 42" },
@@ -62,10 +62,13 @@
             { "name": "STX", "op": 209, "desc": "Armazena o AC na memória no endereço (end + IX).", "example": "STX 51" },
             { "name": "LDBX", "op": 210, "desc": "Carrega para o AC o valor da memória no endereço (BP + IX).", "example": "LDBX" },
             { "name": "STBX", "op": 211, "desc": "Armazena o AC na memória no endereço (BP + IX).", "example": "STBX" },
+            { "name": "LDB", "op": 212, "desc": "Carrega o valor do endereço de memória para B.", "example": "LDB 41" },
+            { "name": "STB", "op": 213, "desc": "Armazena o conteúdo de B no endereço de memória.", "example": "STB 40" },
+            { "name": "LDI", "op": 214, "desc": "Carrega um valor imediato diretamente para o AC.", "example": "LDI 10" },
             { "name": "LOOP", "op": 224, "desc": "Decrementa IX. Se IX != 0, salta para o endereço.", "example": "LOOP 20" },
-            { "name": "VLD2", "op": 248, "desc": "Carrega vetor da memória para o registrador VR.", "example": "VLD2 60" },
-            { "name": "VST2", "op": 249, "desc": "Armazena o vetor de VR na memória.", "example": "VST2 64" },
-            { "name": "VADDV", "op": 250, "desc": "Soma os vetores VAC e VR elemento a elemento, armazenando em VAC.", "example": "VADDV" }
+            { "name": "VLDB", "op": 248, "desc": "Carrega vetor da memória para o registrador VB.", "example": "VLDB 60" },
+            { "name": "VSTB", "op": 249, "desc": "Armazena o vetor de VB na memória.", "example": "VSTB 64" },
+            { "name": "VADDV", "op": 250, "desc": "Soma os vetores VA e VB elemento a elemento, armazenando em VA.", "example": "VADDV" }
         ]
     }
 }

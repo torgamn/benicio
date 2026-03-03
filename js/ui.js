@@ -5,11 +5,12 @@ export const ui = {
     highlightingCode: document.querySelector('#highlighting-area code'),
     memoryGrid: document.getElementById('memory-grid-container'),
     acValue: document.getElementById('ac-value'),
+    bValue: document.getElementById('b-value'),
     pcValue: document.getElementById('pc-value'),
-    vacValue: document.getElementById('vac-value'),
+    vaValue: document.getElementById('va-value'),
     ixValue: document.getElementById('ix-value'),
     bpValue: document.getElementById('bp-value'),
-    vrValue: document.getElementById('vr-value'),
+    vbValue: document.getElementById('vb-value'),
     baseDisplay: document.getElementById('base-display'),
     nFlagBox: document.getElementById('n-flag-box'),
     zFlagBox: document.getElementById('z-flag-box'),
@@ -57,10 +58,11 @@ export const ui = {
     editorTitle: document.getElementById('editor-title-text'),
     gridTitle: document.getElementById('grid-title-text'),
     moduleRadioButtons: document.querySelectorAll('input[name="module-select"]'),
-    vacBox: document.getElementById('vac-box'),
+    vaBox: document.getElementById('va-box'),
+    bBox: document.getElementById('b-box'),
     ixBox: document.getElementById('ix-box'),
     bpBox: document.getElementById('bp-box'),
-    vrBox: document.getElementById('vr-box'),
+    vbBox: document.getElementById('vb-box'),
     cacheContainer: document.querySelector('.cache-container')
 };
 
@@ -90,13 +92,19 @@ export function updateAcUI(ac, zeroFlag, negativeFlag, displayBase, acValue, nFl
     return { ac, zeroFlag, negativeFlag };
 }
 
+export function updateBUI(b, displayBase, bValue) {
+    b &= 0xFF;
+    bValue.textContent = formatNumber(b, displayBase);
+    return b;
+}
+
 export function updatePcUI(pc, displayBase, pcValue) {
     pcValue.textContent = formatNumber(pc, displayBase);
 }
 
-export function updateVacUI(vac, displayBase, vacValue) {
-    const formattedVac = vac.map(v => formatNumber(v, displayBase));
-    vacValue.textContent = `[${formattedVac.join(', ')}]`;
+export function updateVaUI(va, displayBase, vaValue) {
+    const formattedVa = va.map(v => formatNumber(v, displayBase));
+    vaValue.textContent = `[${formattedVa.join(', ')}]`;
 }
 
 export function updateIxUI(ix, displayBase, ixValue) {
@@ -107,9 +115,9 @@ export function updateBpUI(bp, displayBase, bpValue) {
     bpValue.textContent = formatNumber(bp, displayBase);
 }
 
-export function updateVrUI(vr, displayBase, vrValue) {
-    const formattedVr = vr.map(v => formatNumber(v, displayBase));
-    vrValue.textContent = `[${formattedVr.join(', ')}]`;
+export function updateVbUI(vb, displayBase, vbValue) {
+    const formattedVb = vb.map(v => formatNumber(v, displayBase));
+    vbValue.textContent = `[${formattedVb.join(', ')}]`;
 }
 
 export function updateBaseUI(displayBase, baseDisplay) {

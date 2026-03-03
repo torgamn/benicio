@@ -2,7 +2,7 @@ import { CONSTANTS } from './constants.js';
 import { highlightSyntax, assembleCode, highlightMemory, updateLeftLineCounter, calculateInstructionSize } from './assembler.js';
 import { executeSingleInstruction, resetState } from './execution.js';
 import { logMessage, loadLanguage, populateHelpModal } from './language.js';
-import { clearLog, toggleModal, updateAcUI, updatePcUI, updateVacUI, updateIxUI, updateBpUI, updateVrUI, updateCacheUI, updateBaseUI } from './ui.js';
+import { clearLog, toggleModal, updateAcUI, updateBUI, updatePcUI, updateVaUI, updateIxUI, updateBpUI, updateVbUI, updateCacheUI, updateBaseUI } from './ui.js';
 
 export function handleEditorInput(state, ui) {
     const textToProcess = ui.inputLeft.value;
@@ -99,11 +99,12 @@ export function convertLeftEditor(newBase, state, ui) {
     state.zeroFlag = acResult.zeroFlag;
     state.negativeFlag = acResult.negativeFlag;
     
+    state.b = updateBUI(state.b, state.displayBase, ui.bValue);
     updatePcUI(state.pc, state.displayBase, ui.pcValue);
-    updateVacUI(state.vac, state.displayBase, ui.vacValue);
+    updateVaUI(state.va, state.displayBase, ui.vaValue);
     updateIxUI(state.ix, state.displayBase, ui.ixValue);
     updateBpUI(state.bp, state.displayBase, ui.bpValue);
-    updateVrUI(state.vr, state.displayBase, ui.vrValue);
+    updateVbUI(state.vb, state.displayBase, ui.vbValue);
     updateCacheUI(state.iCache, state.dCache, state.displayBase, ui.icacheHits, ui.icacheMisses, ui.icacheTag, ui.icacheData, ui.dcacheHits, ui.dcacheMisses, ui.dcacheTag, ui.dcacheData);
     updateBaseUI(state.displayBase, ui.baseDisplay);
     updateLeftLineCounter(ui.inputLeft.value, state.leftInputBase, state.displayBase, ui.outputLeft, CONSTANTS.MEMORY_SIZE);
@@ -142,11 +143,13 @@ export function loadFile(state, ui) {
             state.ac = acResult.ac;
             state.zeroFlag = acResult.zeroFlag;
             state.negativeFlag = acResult.negativeFlag;
+            
+            state.b = updateBUI(state.b, state.displayBase, ui.bValue);
             updatePcUI(state.pc, state.displayBase, ui.pcValue);
-            updateVacUI(state.vac, state.displayBase, ui.vacValue);
+            updateVaUI(state.va, state.displayBase, ui.vaValue);
             updateIxUI(state.ix, state.displayBase, ui.ixValue);
             updateBpUI(state.bp, state.displayBase, ui.bpValue);
-            updateVrUI(state.vr, state.displayBase, ui.vrValue);
+            updateVbUI(state.vb, state.displayBase, ui.vbValue);
             updateCacheUI(state.iCache, state.dCache, state.displayBase, ui.icacheHits, ui.icacheMisses, ui.icacheTag, ui.icacheData, ui.dcacheHits, ui.dcacheMisses, ui.dcacheTag, ui.dcacheData);
             updateBaseUI(state.displayBase, ui.baseDisplay);
         };
@@ -172,12 +175,13 @@ export function setModule(moduleName, state, ui) {
     const isClassic = moduleName === 'classic';
     const isExpanded = moduleName === 'expanded';
 
-    ui.vacBox.classList.toggle('hidden', isClassic);
+    ui.vaBox.classList.toggle('hidden', isClassic);
     ui.cacheContainer.classList.toggle('hidden', isClassic);
     
     ui.ixBox.classList.toggle('hidden', !isExpanded);
     ui.bpBox.classList.toggle('hidden', !isExpanded);
-    ui.vrBox.classList.toggle('hidden', !isExpanded);
+    ui.vbBox.classList.toggle('hidden', !isExpanded);
+    ui.bBox.classList.toggle('hidden', !isExpanded);
     
     highlightSyntax(ui.inputLeft.value, state, ui);
     assembleCode(state, ui.inputLeft.value, CONSTANTS.MEMORY_SIZE);

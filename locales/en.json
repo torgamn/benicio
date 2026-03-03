@@ -47,13 +47,13 @@
             { "name": "JN", "op": 144, "desc": "Jumps to the memory address if the sign flag (N) is set.", "example": "JN 46" },
             { "name": "JZ", "op": 160, "desc": "Jumps to the memory address if the zero flag (Z) is set.", "example": "JZ 47" },
             { "name": "HLT", "op": 240, "desc": "Halts the program execution.", "example": "HLT" },
-            { "name": "VLD", "op": 241, "desc": "Loads a vector from memory (starting at address) into the VAC register.", "example": "VLD 50" },
-            { "name": "VST", "op": 242, "desc": "Stores the vector from VAC into memory (starting at address).", "example": "VST 54" },
-            { "name": "VADD", "op": 243, "desc": "Adds, element by element, VAC with the vector stored at memory address.", "example": "VADD 51" },
-            { "name": "VEADD", "op": 244, "desc": "Adds the scalar value of AC to all elements of VAC.", "example": "VEADD" },
-            { "name": "VOR", "op": 245, "desc": "Performs a logical OR, element by element, between VAC and the vector from memory.", "example": "VOR 52" },
-            { "name": "VAND", "op": 246, "desc": "Performs a logical AND, element by element, between VAC and the vector from memory.", "example": "VAND 53" },
-            { "name": "VNOT", "op": 247, "desc": "Inverts bit by bit each element of the VAC vector.", "example": "VNOT" },
+            { "name": "VLDA", "op": 241, "desc": "Loads a vector from memory (starting at address) into the VA register.", "example": "VLDA 50" },
+            { "name": "VSTA", "op": 242, "desc": "Stores the vector from VA into memory (starting at address).", "example": "VSTA 54" },
+            { "name": "VADD", "op": 243, "desc": "Adds, element by element, VA with the vector stored at memory address.", "example": "VADD 51" },
+            { "name": "VEADD", "op": 244, "desc": "Adds the scalar value of AC to all elements of VA.", "example": "VEADD" },
+            { "name": "VOR", "op": 245, "desc": "Performs a logical OR, element by element, between VA and the vector from memory.", "example": "VOR 52" },
+            { "name": "VAND", "op": 246, "desc": "Performs a logical AND, element by element, between VA and the vector from memory.", "example": "VAND 53" },
+            { "name": "VNOT", "op": 247, "desc": "Inverts bit by bit each element of the VA vector.", "example": "VNOT" },
             { "name": "LDIX", "op": 176, "desc": "Loads the value from memory into the Index Register (IX).", "example": "LDIX 40" },
             { "name": "STIX", "op": 177, "desc": "Stores IX into memory.", "example": "STIX 41" },
             { "name": "LDBP", "op": 192, "desc": "Loads the value from memory into the Base Pointer (BP).", "example": "LDBP 42" },
@@ -62,10 +62,13 @@
             { "name": "STX", "op": 209, "desc": "Stores AC into memory at address (end + IX).", "example": "STX 51" },
             { "name": "LDBX", "op": 210, "desc": "Loads into AC the memory value at address (BP + IX).", "example": "LDBX" },
             { "name": "STBX", "op": 211, "desc": "Stores AC into memory at address (BP + IX).", "example": "STBX" },
+            { "name": "LDB", "op": 212, "desc": "Loads the value from the memory address into B.", "example": "LDB 41" },
+            { "name": "STB", "op": 213, "desc": "Stores the content of B at memory address.", "example": "STB 40" },
+            { "name": "LDI", "op": 214, "desc": "Loads an immediate value directly into AC.", "example": "LDI 10" },
             { "name": "LOOP", "op": 224, "desc": "Decrements IX. If IX != 0, jumps to the address.", "example": "LOOP 20" },
-            { "name": "VLD2", "op": 248, "desc": "Loads a vector from memory into the VR register.", "example": "VLD2 60" },
-            { "name": "VST2", "op": 249, "desc": "Stores the vector from VR into memory.", "example": "VST2 64" },
-            { "name": "VADDV", "op": 250, "desc": "Adds VAC and VR element by element, storing in VAC.", "example": "VADDV" }
+            { "name": "VLDB", "op": 248, "desc": "Loads a vector from memory into the VB register.", "example": "VLDB 60" },
+            { "name": "VSTB", "op": 249, "desc": "Stores the vector from VB into memory.", "example": "VSTB 64" },
+            { "name": "VADDV", "op": 250, "desc": "Adds VA and VB element by element, storing in VA.", "example": "VADDV" }
         ]
     }
 }
