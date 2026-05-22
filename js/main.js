@@ -1,10 +1,11 @@
 import { CONSTANTS } from './constants.js';
 import { state } from './state.js';
-import { ui, createMemoryGrid } from './ui.js';
+import { ui, createMemoryGrid, applySyntaxColors } from './ui.js';
 import { loadLanguage, populateHelpModal, logMessage } from './language.js';
 import { handleEditorInput, bindEventListeners, setModule } from './events.js';
 import { resetState } from './execution.js';
 import { calculateInstructionSize } from './assembler.js';
+import { themeConfig } from './theme-config.js';
 
 async function main() {
     // Inicializa o tema baseado na preferência do sistema (definido no state.js)
@@ -13,11 +14,15 @@ async function main() {
         ui.themeSwitch.textContent = '☀️';
     }
 
+    // Aplica as configurações de cores do novo arquivo
+    state.syntaxColors = themeConfig;
+    applySyntaxColors(state.currentTheme, state.syntaxColors);
+
     createMemoryGrid(ui.memoryGrid, CONSTANTS.MEMORY_SIZE);
     bindEventListeners(state, ui);
     
-    let initialContent = `; Programa
-VLDA 10 ; Carrega [1, 2, 3, 4] no VA
+    // Removida a linha "; Programa" do início
+    let initialContent = `VLDA 10 ; Carrega [1, 2, 3, 4] no VA
 LDI 10 ; Carrega 10 no AC (A) imediatamente
 VEADD ; VA = [11, 12, 13, 14]
 VNOT ; Inverte os bits de cada elemento

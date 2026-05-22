@@ -2,7 +2,7 @@ import { CONSTANTS } from './constants.js';
 import { highlightSyntax, assembleCode, highlightMemory, updateLeftLineCounter, calculateInstructionSize } from './assembler.js';
 import { executeSingleInstruction, resetState } from './execution.js';
 import { logMessage, loadLanguage, populateHelpModal } from './language.js';
-import { clearLog, toggleModal, updateAcUI, updateBUI, updatePcUI, updateVaUI, updateIxUI, updateBpUI, updateVbUI, updateCacheUI, updateBaseUI } from './ui.js';
+import { clearLog, toggleModal, updateAcUI, updateBUI, updatePcUI, updateVaUI, updateIxUI, updateBpUI, updateVbUI, updateCacheUI, updateBaseUI, applySyntaxColors } from './ui.js';
 
 export function handleEditorInput(state, ui) {
     const textToProcess = ui.inputLeft.value;
@@ -214,6 +214,7 @@ export function bindEventListeners(state, ui) {
         state.currentTheme = state.currentTheme === 'light' ? 'dark' : 'light';
         document.body.classList.toggle('dark-mode');
         ui.themeSwitch.textContent = state.currentTheme === 'light' ? '🌙' : '☀️';
+        applySyntaxColors(state.currentTheme, state.syntaxColors);
     });
 
     ui.inputLeft.addEventListener('input', () => handleEditorInput(state, ui));
@@ -237,5 +238,39 @@ export function bindEventListeners(state, ui) {
         radio.addEventListener('change', (event) => {
             setModule(event.target.value, state, ui);
         });
+    });
+
+    // LÓGICA DO DRAG/RESIZER
+    let isDragging = false;
+
+    ui.resizer.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        ui.resizer.classList.add('dragging');
+        document.body.style.cursor = 'col-resize';
+        e.preventDefault(); // Previne seleção de texto
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        const container = ui.editorWrapper.parentElement; // a div .editors
+        const containerRect = container.getBoundingClientRect();
+        
+        // Calcula a nova largura baseada na posição do mouse
+        let newWidthPercentage = ((e.clientX - containerRect.left) / containerRect.width) * 100;
+        
+        // Define limites (min 20%, max 80%)
+        if (newWidthPercentage < 20) newWidthPercentage = 20;
+        if (newWidthPercentage > 80) newWidthPercentage = 80;
+
+        ui.editorWrapper.style.width = `${newWidthPercentage}%`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (isDragging) {
+            isDragging = false;
+            ui.resizer.classList.remove('dragging');
+            document.body.style.cursor = ''; // Retorna cursor ao padrão
+        }
     });
 }

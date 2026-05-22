@@ -21,11 +21,13 @@
     --bg-overlay: rgba(0, 0, 0, 0.5);
     --bg-scrollbar: #f0f0f0;
     --bg-scrollbar-thumb: #888;
+    --bg-th: #f2f2f2;
+    
+    /* CORES DE SEGURANÇA (Fallback) */
     --color-simple: red;
     --color-operand: blue;
     --color-vector: green;
     --color-comment: purple;
-    --bg-th: #f2f2f2;
 }
 
 body.dark-mode {
@@ -51,11 +53,13 @@ body.dark-mode {
     --bg-overlay: rgba(0, 0, 0, 0.7);
     --bg-scrollbar: #1e1e1e;
     --bg-scrollbar-thumb: #555;
+    --bg-th: #2d2d2d;
+
+    /* CORES DE SEGURANÇA DARK (Fallback) */
     --color-simple: #ff6b6b;
     --color-operand: #4dabf7;
     --color-vector: #69db7c;
     --color-comment: #da77f2;
-    --bg-th: #2d2d2d;
 }
 
 * {
@@ -208,24 +212,39 @@ body {
 
 .editors {
     display: flex;
-    justify-content: space-between;
     width: 100%;
-    gap: 20px;
     flex-grow: 1;
     min-height: 200px;
 }
 
-.editor-wrapper, .grid-wrapper {
+.editor-wrapper {
+    width: 50%; /* Posição default de 50% */
     display: flex;
     flex-direction: column;
     height: 100%;
 }
-.editor-wrapper {
-    width: 48%;
+
+.resizer {
+    width: 10px;
+    cursor: col-resize;
+    background-color: var(--border-color);
+    /* Margem de 35px no topo compensa a altura exata do título h3 das janelas (30px line-height + 5px margin) */
+    margin: 35px 10px 0 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
 }
+
+.resizer:hover, .resizer.dragging {
+    background-color: var(--bg-dropdown-hover);
+}
+
 .grid-wrapper {
-    flex-grow: 1;
+    flex-grow: 1; /* Ocupa todo o resto do espaço disponível */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
+
 .editor-title {
     text-align: center;
     margin-bottom: 5px;
@@ -499,8 +518,11 @@ body {
         min-height: 400px;
     }
     .editor-wrapper, .grid-wrapper {
-        width: 100%;
+        width: 100% !important; /* Força 100% em telas pequenas, ignorando o JS */
         height: 50%;
+    }
+    .resizer {
+        display: none; /* Esconde o pipe no mobile já que as janelas ficam uma embaixo da outra */
     }
     .top-bar {
         padding: 10px;

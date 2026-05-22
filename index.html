@@ -40,7 +40,7 @@
 
        <main class="main-content">
            <div class="editors">
-               <div class="editor-wrapper">
+               <div class="editor-wrapper" id="editor-wrapper">
                    <h3 class="editor-title" id="editor-title-text">Edição de Memória</h3>
                    <div class="editor-container">
                        <div id="output-left" class="line-counter"></div>
@@ -48,12 +48,42 @@
                        <pre id="highlighting-area" class="textarea-highlight" aria-hidden="true"><code></code></pre>
                    </div>
                </div>
-               <div class="grid-wrapper">
+               
+               <div class="resizer" id="drag-resizer"></div>
+               
+               <div class="grid-wrapper" id="grid-wrapper">
                    <h3 class="editor-title" id="grid-title-text">Visualização de Memória</h3>
                    <div id="memory-grid-container" class="memory-grid-container">
                    </div>
                </div>
            </div>
+
+           <div class="cache-container">
+               <div class="cache-box">
+                   <div class="cache-title">I-Cache (8 bytes)</div>
+                   <div class="cache-stats">
+                       <span>Hits: <span id="icache-hits">0</span></span>
+                       <span>Misses: <span id="icache-misses">0</span></span>
+                   </div>
+                   <div class="cache-line">
+                       <span>Tag: <span id="icache-tag">-</span></span>
+                       <span>Data: <span id="icache-data">[...]</span></span>
+                   </div>
+               </div>
+               <div class="cache-box">
+                   <div class="cache-title">D-Cache (16 bytes)</div>
+                   <div class="cache-stats">
+                       <span>Hits: <span id="dcache-hits">0</span></span>
+                       <span>Misses: <span id="dcache-misses">0</span></span>
+                   </div>
+                   <div class="cache-line">
+                       <span>Tag: <span id="dcache-tag">-</span></span>
+                       <span>Data: <span id="dcache-data">[...]</span></span>
+                   </div>
+               </div>
+           </div>
+
+           <div id="log-container" class="log-container"></div>
 
            <div class="status-container">
                <div class="status-box">
@@ -98,33 +128,6 @@
                    <button id="btnNext" title="Next">→</button>
                </div>
            </div>
-
-           <div class="cache-container">
-               <div class="cache-box">
-                   <div class="cache-title">I-Cache (8 bytes)</div>
-                   <div class="cache-stats">
-                       <span>Hits: <span id="icache-hits">0</span></span>
-                       <span>Misses: <span id="icache-misses">0</span></span>
-                   </div>
-                   <div class="cache-line">
-                       <span>Tag: <span id="icache-tag">-</span></span>
-                       <span>Data: <span id="icache-data">[...]</span></span>
-                   </div>
-               </div>
-               <div class="cache-box">
-                   <div class="cache-title">D-Cache (16 bytes)</div>
-                   <div class="cache-stats">
-                       <span>Hits: <span id="dcache-hits">0</span></span>
-                       <span>Misses: <span id="dcache-misses">0</span></span>
-                   </div>
-                   <div class="cache-line">
-                       <span>Tag: <span id="dcache-tag">-</span></span>
-                       <span>Data: <span id="dcache-data">[...]</span></span>
-                   </div>
-               </div>
-           </div>
-
-           <div id="log-container" class="log-container"></div>
        </main>
 
        <div class="modal" id="about-modal">
@@ -151,11 +154,11 @@
                     <label for="module-classic" id="module-classic-label">Neander Clássico</label>
                 </div>
                 <div class="module-option">
-                    <input type="radio" id="module-v" name="module-select" value="v" checked>
+                    <input type="radio" id="module-v" name="module-select" value="v">
                     <label for="module-v" id="module-v-label">Neander-V</label>
                 </div>
                 <div class="module-option">
-                    <input type="radio" id="module-expanded" name="module-select" value="expanded">
+                    <input type="radio" id="module-expanded" name="module-select" value="expanded" checked>
                     <label for="module-expanded" id="module-expanded-label">Neander-V Expandido</label>
                 </div>
             </div>

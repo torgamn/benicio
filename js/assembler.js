@@ -37,7 +37,12 @@ export function highlightSyntax(text, state, ui) {
 
     highlightedText = highlightedText.replace(simpleRegex, (match) => {
         const upperMatch = match.toUpperCase();
-        if (isInstructionVisible(upperMatch, state.currentModule)) return `<span class="instr-simple">${match}</span>`;
+        if (isInstructionVisible(upperMatch, state.currentModule)) {
+            if (CONSTANTS.VECTOR_INSTRUCTIONS.includes(upperMatch)) {
+                return `<span class="instr-vector">${match}</span>`;
+            }
+            return `<span class="instr-simple">${match}</span>`;
+        }
         return match;
     });
 

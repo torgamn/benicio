@@ -18,8 +18,9 @@ export const state = {
     displayBase: 10,
     leftInputBase: 10,
     currentLanguage: (navigator.language.toLowerCase().startsWith('pt')) ? 'pt' : 'en',
-    currentModule: 'v',
+    currentModule: 'expanded', // Alterado para o modo expandido por padrão
     currentTheme: systemPrefersDark ? 'dark' : 'light',
+    syntaxColors: null,
     languageStrings: {},
     iCache: { tag: -1, valid: false, data: new Array(CONSTANTS.I_CACHE_SIZE).fill(0), hits: 0, misses: 0 },
     dCache: { tag: -1, valid: false, data: new Array(CONSTANTS.D_CACHE_SIZE).fill(0), hits: 0, misses: 0 }

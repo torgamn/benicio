@@ -4,6 +4,9 @@ export const ui = {
     highlightingArea: document.getElementById('highlighting-area'),
     highlightingCode: document.querySelector('#highlighting-area code'),
     memoryGrid: document.getElementById('memory-grid-container'),
+    editorWrapper: document.getElementById('editor-wrapper'), // ADICIONADO
+    gridWrapper: document.getElementById('grid-wrapper'), // ADICIONADO
+    resizer: document.getElementById('drag-resizer'), // ADICIONADO
     acValue: document.getElementById('ac-value'),
     bValue: document.getElementById('b-value'),
     pcValue: document.getElementById('pc-value'),
@@ -158,5 +161,13 @@ export function createMemoryGrid(memoryGrid, memorySize) {
         cell.appendChild(addr);
         cell.appendChild(value);
         memoryGrid.appendChild(cell);
+    }
+}
+
+export function applySyntaxColors(theme, syntaxColors) {
+    if (!syntaxColors || !syntaxColors[theme]) return;
+    const colors = syntaxColors[theme];
+    for (const [key, value] of Object.entries(colors)) {
+        document.body.style.setProperty(`--${key}`, value);
     }
 }
